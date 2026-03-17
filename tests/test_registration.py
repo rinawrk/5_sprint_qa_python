@@ -12,7 +12,11 @@ from locators import RegisterPageLocators, LoginPageLocators
 
 
 class TestRegistration:
+
+    # Проверка успешной регистрации нового пользователя
+
     def test_successful_registration(self, driver):
+        
         # Открываем страницу регистрации
         driver.get(REGISTER_URL)
 
@@ -36,6 +40,8 @@ class TestRegistration:
 
         # Проверяем, что произошёл редирект на страницу логина
         assert driver.current_url == LOGIN_URL
+
+    # Проверка появления ошибки при регистрации с коротким паролем
 
     def test_registration_with_short_password_shows_error(self, driver):
         # Открываем страницу регистрации
