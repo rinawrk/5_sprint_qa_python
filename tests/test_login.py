@@ -45,3 +45,31 @@ class TestLogin:
 
         # Проверяем, что произошёл вход в аккаунт
         assert driver.current_url == BASE_URL
+
+    # Проверка входа через кнопку "Личный Кабинет"
+
+    def test_login_from_personal_account_button(self, driver):
+        
+        # На главной странице нажимаем кнопку "Личный Кабинет"
+        driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
+
+        # Ждём загрузки страницы логина
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located(LoginPageLocators.LOGIN_BUTTON)
+        )
+
+        # Вводим данные существующего пользователя
+        driver.find_element(*LoginPageLocators.EMAIL_INPUT).send_keys(EXISTING_USER_EMAIL)
+        driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(EXISTING_USER_PASSWORD)
+
+        # Нажимаем кнопку "Войти"
+        driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
+
+        # Ждём загрузки главной страницы авторизованного пользователя
+        WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located(MainPageLocators.PLACE_ORDER_BUTTON)
+        )
+
+        # Проверяем, что произошёл вход в аккаунт
+        assert driver.current_url == BASE_URL
+        
