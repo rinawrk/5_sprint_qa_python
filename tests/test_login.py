@@ -116,5 +116,3 @@ class TestLogin:
 
         # Проверяем, что произошёл вход в аккаунт
         assert driver.current_url == BASE_URL
-    
-        
